@@ -1,0 +1,44 @@
+{% include 'header.html' %}
+<h1>Edit Car</h1>
+<form method="POST">
+    <label for="brand">Brand:</label>
+    <input type="text" id="brand" name="brand" value="{{ car.brand }}" required><br>
+    <label for="model">Model:</label>
+    <input type="text" id="model" name="model" value="{{ car.model }}" required><br>
+    <!-- Другие поля -->
+    <label for="year">Year:</label>
+    <input type="text" id="year" name="year" value="{{ car.year }}" required><br>
+    <label for="trim">Trim:</label>
+    <input type="text" id="trim" name="trim" value="{{ car.trim }}"><br>
+    <label for="vin">VIN:</label>
+    <input type="text" id="vin" name="vin" value="{{ car.vin }}"><br>
+    <label for="driveline">Driveline:</label>
+    <input type="text" id="driveline" name="driveline" value="{{ car.driveline }}"><br>
+    <label for="carfax_report">Carfax Report:</label>
+    <input type="text" id="carfax_report" name="carfax_report" value="{{ car.carfax_report }}"><br>
+    <label for="mileage">Mileage:</label>
+    <input type="text" id="mileage" name="mileage" value="{{ car.mileage }}"><br>
+    <label for="fuel_type">Fuel Type:</label>
+    <input type="text" id="fuel_type" name="fuel_type" value="{{ car.fuel_type }}"><br>
+    <label for="owners">Owners:</label>
+    <input type="text" id="owners" name="owners" value="{{ car.owners }}"><br>
+    <label for="engine">Engine:</label>
+    <input type="text" id="engine" name="engine" value="{{ car.engine }}"><br>
+    <label for="price">Price:</label>
+    <input type="text" id="price" name="price" value="{{ car.price }}"><br>
+    <label for="body_style">Body Style:</label>
+    <input type="text" id="body_style" name="body_style" value="{{ car.body_style }}"><br>
+    <button type="submit">Save Changes</button>
+</form>
+<h2>Photos</h2>
+<ul>
+    {% for photo in car.photos %}
+        <li>
+            <img src="{{ photo.path }}" alt="Car Photo" style="max-width: 350px; max-height: 350px;">
+            <form method="POST" action="{{ url_for('delete_photo', photo_id=photo.id) }}">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+{% include 'footer.html' %}
