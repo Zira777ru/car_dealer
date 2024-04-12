@@ -1,11 +1,11 @@
 # docker-compose.yml
 version: '3'
 services:
-  outline-app:
+  car_dealer:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: outline-app
+    container_name: car_dealer
     restart: always
     volumes:
       - ./instance:/instance  
