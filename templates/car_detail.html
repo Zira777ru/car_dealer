@@ -1,67 +1,147 @@
 {% include 'header.html' %}
 
 <div class="container mt-5">
-    <h1>{{ car.year }} {{ car.brand }} {{ car.model }}</h1>
-    <ul class="list-group mt-3">
-        <li class="list-group-item"><strong>Year:</strong> {{ car.year }}</li>
-        <li class="list-group-item"><strong>Trim:</strong> {{ car.trim }}</li>
-        <li class="list-group-item"><strong>VIN:</strong> {{ car.vin }}</li>
-        <li class="list-group-item"><strong>Driveline:</strong> {{ car.driveline }}</li>
-        <li class="list-group-item"><strong>Carfax Report:</strong> <a href="{{ car.carfax_report }}">{{ car.carfax_report }}</a></li>
-        <li class="list-group-item"><strong>Mileage:</strong> {{ car.mileage }}</li>
-        <li class="list-group-item"><strong>Fuel Type:</strong> {{ car.fuel_type }}</li>
-        <li class="list-group-item"><strong>Owners:</strong> {{ car.owners }}</li>
-        <li class="list-group-item"><strong>Engine:</strong> {{ car.engine }}</li>
-        <li class="list-group-item"><strong>Price:</strong> {{ car.price }}</li>
-        <li class="list-group-item"><strong>Body Style:</strong> {{ car.body_style }}</li>
-    </ul>
-
-    <h2 class="mt-5">Loan Calculator</h2>
-    <form action="" method="post">
-        <label for="loan_amount">Loan Amount:</label>
-        <input type="number" id="loan_amount" name="loan_amount" required><br><br>
-        
-        <label for="interest_rate">Interest Rate (%):</label>
-        <input type="number" id="interest_rate" name="interest_rate" required><br><br>
-        
-        <label for="loan_term">Loan Term (years):</label>
-        <input type="number" id="loan_term" name="loan_term" required><br><br>
-        
-        <button type="submit">Calculate</button>
-    </form>
-    
-    {% if monthly_payment %}
-    <h3>Monthly Payment:</h3>
-    <p>${{ monthly_payment }}</p>
-    {% endif %}
-    
-    <h2 class="mt-5">Photos</h2>
-
-    <div id="carouselExampleIndicators" class="carousel slide mt-3" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            {% for index, photo in enumerate(car.photos) %}
-                <div class="carousel-item {% if index == 0 %}active{% endif %}">
-                    <img src="{{ photo.path }}" class="d-block mx-auto img-fluid" style="max-height: 500px; object-fit: contain;" alt="Car Photo">
+    <!-- Car Photos Carousel -->
+    <div class="d-flex flex-row flex-wrap align-items-start">
+        <div class="carousel-container">
+            <div id="carouselExampleIndicators" class="carousel slide mt-3" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    {% for index, photo in enumerate(car.photos) %}
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ index }}" {% if index == 0 %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ index + 1 }}"></button>
+                    {% endfor %}
                 </div>
-            {% endfor %}
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-
-    <div class="row mt-3">
-        {% for index, photo in enumerate(car.photos) %}
-            <div class="col-md-1">
-                <img src="{{ photo.path }}" class="img-thumbnail img-fluid" style="max-width: 100%; height: auto;" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ index }}" alt="Car Photo">
+                <div class="carousel-inner">
+                    {% for index, photo in enumerate(car.photos) %}
+                    <div class="carousel-item {% if index == 0 %}active{% endif %}">
+                        <img src="{{ photo.path }}" class="d-block w-100 car-photo" alt="Car Photo {{ index + 1 }}">
+                    </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-        {% endfor %}
+        </div>
     </div>
-</div>
+    
 
+    <!-- Car Details -->
+    <div class="car-details">
+        <h1>{{ car.year }} {{ car.brand }} {{ car.model }} {{ car.trim }}</h1>
+        <h1><li class="list-group-item"><strong>Price:</strong> ${{ car.price }}</li></h1>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Year:</strong> {{ car.year }}</li>
+            <li class="list-group-item"><strong>VIN:</strong> {{ car.vin }}</li>
+            <li class="list-group-item"><strong>Driveline:</strong> {{ car.driveline }}</li>
+            <li class="list-group-item"><strong>Carfax Report:</strong> <a href="{{ car.carfax_report }}">View Report</a></li>
+            <li class="list-group-item"><strong>Mileage:</strong> {{ car.mileage }}</li>
+            <li class="list-group-item"><strong>Fuel Type:</strong> {{ car.fuel_type }}</li>
+            <li class="list-group-item"><strong>Owners:</strong> {{ car.owners }}</li>
+            <li class="list-group-item"><strong>Engine:</strong> {{ car.engine }}</li>
+            <li class="list-group-item"><strong>Price:</strong> ${{ car.price }}</li>
+            <li class="list-group-item"><strong>Body Style:</strong> {{ car.body_style }}</li>
+        </ul>
+    </div>
+<!-- Credit Calculator -->
+<div class="credit-calculator">
+    <h2>Credit Calculator</h2>
+    <form id="creditCalculatorForm">
+        <div class="mb-3">
+            <label for="loanAmount" class="form-label">Loan Amount ($)</label>
+            <input type="number" class="form-control" id="loanAmount" value="{{ car.price }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Credit Score</label>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-outline-primary credit-score" data-rate="7.9">Very Poor (&lt;600)</button>
+                <button type="button" class="btn btn-outline-primary credit-score" data-rate="6.4">Poor (600-679)</button>
+                <button type="button" class="btn btn-outline-primary credit-score" data-rate="4.9" selected>Fair (680-719)</button>
+                <button type="button" class="btn btn-outline-primary credit-score" data-rate="3.4">Good (720-780)</button>
+                <button type="button" class="btn btn-outline-primary credit-score" data-rate="1.9">Excellent (&gt;780)</button>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Loan Term (Months)</label>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-outline-secondary loan-term" data-months="24">24</button>
+                <button type="button" class="btn btn-outline-secondary loan-term" data-months="36" selected>36</button>
+                <button type="button" class="btn btn-outline-secondary loan-term" data-months="48">48</button>
+                <button type="button" class="btn btn-outline-secondary loan-term" data-months="60">60</button>
+                <button type="button" class="btn btn-outline-secondary loan-term" data-months="72">72</button>
+            </div>
+        </div>
+        <!-- Down Payment Slider -->
+        <div class="mb-3">
+            <label for="downPayment" class="form-label">Down Payment</label>
+            <input type="range" class="form-range" id="downPayment" min="1000" max="{{ car.price }}" value="2000" oninput="updateDownPaymentValue(this.value)">
+            <span id="downPaymentValue">$2000</span>
+        </div>
+
+    </form>
+    <p id="monthlyPayment">Monthly Payment: $0</p>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let annualInterest = 4.9; // Default to Fair credit score rate
+        let loanTermMonths = 36; // Default to 36 months
+    
+        // Function to update and calculate the loan
+        function calculateLoan() {
+            const loanAmount = parseFloat(document.getElementById('loanAmount').value); // Use .value for input
+            const downPayment = parseFloat(document.getElementById('downPayment').value);
+            const adjustedLoanAmount = loanAmount - downPayment;
+            const monthlyInterest = annualInterest / 100 / 12;
+            const numberOfPayments = loanTermMonths;
+            
+            const part1 = Math.pow(1 + monthlyInterest, numberOfPayments);
+            const monthlyPayment = adjustedLoanAmount > 0 ? (adjustedLoanAmount * monthlyInterest * part1) / (part1 - 1) : 0;
+    
+            if(isFinite(monthlyPayment)){
+                document.getElementById('monthlyPayment').innerText = `Monthly Payment: $${monthlyPayment.toFixed(2)}`;
+            } else {
+                document.getElementById('monthlyPayment').innerText = "Please check your inputs.";
+            }
+        }
+    
+        // Event listeners for credit score buttons
+        document.querySelectorAll('.credit-score').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.credit-score').forEach(btn => btn.classList.remove('btn-primary'));
+                this.classList.add('btn-primary'); // Highlight selected button
+                annualInterest = this.getAttribute('data-rate');
+                calculateLoan();
+            });
+        });
+    
+        // Event listeners for loan term buttons
+        document.querySelectorAll('.loan-term').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.loan-term').forEach(btn => btn.classList.remove('btn-secondary'));
+                this.classList.add('btn-secondary'); // Highlight selected button
+                loanTermMonths = this.getAttribute('data-months');
+                calculateLoan();
+            });
+        });
+    
+        // Event listener for the down payment slider
+        document.getElementById('downPayment').addEventListener('input', function() {
+            document.getElementById('downPaymentValue').innerText = `$${this.value}`;
+            calculateLoan();
+        });
+    
+        // Initial calculation
+        calculateLoan();
+    });
+    </script>
+    
+    
+    
+    
+    
+    
 {% include 'footer.html' %}

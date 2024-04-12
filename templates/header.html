@@ -1,12 +1,8 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
   <title>Car Dealership</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
@@ -14,66 +10,32 @@
   <!-- Favicons -->
   <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}">
   <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}">
-  
+
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-  
+
   <!-- Vendor CSS Files -->
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/boxicons/css/boxicons.min.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/remixicon/remixicon.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}">
-  
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/boxicons/css/boxicons.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/remixicon/remixicon.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}">
+
   <!-- Template Main CSS File -->
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-  
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-
-
 <body>
-    <header id="header" class="fixed-top ">
-    <div class="container d-flex align-items-center justify-content-between">
+    <header id="header" class="fixed-top header-transparent">
+      <div class="container d-flex align-items-center justify-content-between">
+          <a href="/" class="logo"><img src="{{ url_for('static', filename='img/logo.png') }}" alt="" class="img-fluid"></a>
+          
+          <div class="mobile-contact-toggle"><i class="bi bi-three-dots-vertical"></i></div>
 
-        <h1 class="logo"><a href="/">Tempo</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-  
-        <nav id="navbar" class="navbar">
-          <ul>
-            <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-            <li><a class="nav-link scrollto" href="#about">About</a></li>
-            <li><a class="nav-link scrollto" href="#services">Services</a></li>
-            <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-            <li><a class="nav-link scrollto" href="#team">Team</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-              <ul>
-                <li><a href="#">Drop Down 1</a></li>
-                <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                  <ul>
-                    <li><a href="#">Deep Drop Down 1</a></li>
-                    <li><a href="#">Deep Drop Down 2</a></li>
-                    <li><a href="#">Deep Drop Down 3</a></li>
-                    <li><a href="#">Deep Drop Down 4</a></li>
-                    <li><a href="#">Deep Drop Down 5</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">Drop Down 2</a></li>
-                <li><a href="#">Drop Down 3</a></li>
-                <li><a href="#">Drop Down 4</a></li>
-              </ul>
-            </li>
-            <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          </ul>
-          <i class="bi bi-list mobile-nav-toggle">gdfgfdg</i>
-        </nav><!-- .navbar -->
-  
-    </div>
+          <div class="header-contact-info">
+              <a href="https://maps.app.goo.gl/gAq8UrJkMCk4U7Vy7" target="_blank" class="address icon">7000 Franklin Blvd, Sacramento, CA 95823</a>
+              <a href="tel:+16265927937" class="phone icon">+1 626 592 7937</a>
+              <a href="https://m.me/igor.golubev.nn" target="_blank" class="message icon">Message</a>
+          </div>
+      </div>
     </header><!-- End Header -->
-
-
-    
-
-    

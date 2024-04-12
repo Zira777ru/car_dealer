@@ -1,31 +1,63 @@
 {% include 'header.html' %}
-<h1>Welcome to the Car Dealership</h1>
 
+<!-- Our Features Section -->
+<!-- Our Features Section -->
+<section id="our-features" class="our-features">
+    <div class="container">
+  
+      <div class="row feature-row">
+        <div class="col feature-box">
+          <i class="bi bi-cash"></i>
+          <h4>Financing</h4>
+          <p>Flexible financing options to get you on the road.</p>
+        </div>
+        
+        <div class="col feature-box">
+          <i class="bi bi-shield-check"></i>
+          <h4>Warranty</h4>
+          <p>Comprehensive warranties for peace of mind.</p>
+        </div>
+        
+        <div class="col feature-box">
+          <i class="bi bi-arrow-left-right"></i>
+          <h4>Trade-In</h4>
+          <p>Competitive trade-in values for your current vehicle.</p>
+        </div>
+        
+        <div class="col feature-box">
+          <i class="bi bi-tools"></i>
+          <h4>Repair</h4>
+          <p>Expert repairs and maintenance services.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
 
 <div class="container mt-5">
-<div class="row">
-    {% for car in cars %}
-    <div class="col-md-4 mb-2">
-        
-        <div class="card h-100">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <a href="{{ url_for('car_detail', car_id=car.id) }}">
-                        <img src="{{ car.photos[0].path }}" class="img-fluid rounded-start" alt="Car Photo">
-                    </a>
-                </div>
-  
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <a href="{{ url_for('car_detail', car_id=car.id) }}" class="card-title" style="font-size: 18px; font-weight: bold;">{{ car.year }} {{ car.brand }} {{ car.model }}</a>
-                        <p class="card-text" style="font-size: 18px; font-weight: bold;"><i style="font-size: 12px;">Price: </i><br>${{ '{:,.0f}'.format(car.price) }} | ${{ '{:,.0f}'.format(car.price * ((0.15 / 12) * (1 + (0.15 / 12)) ** 36) / (((1 + (0.15 / 12)) ** 36) - 1)) }}/mo*</p>
-                        <p class="card-text" style="font-size: 18px; font-weight: bold;"><i style="font-size: 12px;">Mileage:</i><br> {{ '{:,.0f}'.format(car.mileage) }}</p>
-                    </div>
+
+    <div class="row">
+        {% for car in cars %}
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card car-card">
+                <a href="{{ url_for('car_detail', car_id=car.id) }}" class="card-image-link">
+                    <img src="{{ car.photos[0].path }}" class="card-img-top" alt="Car Photo">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{{ url_for('car_detail', car_id=car.id) }}">{{ car.year }} {{ car.brand }} {{ car.model }}</a>
+                    </h5>
+                    <p class="card-price">${{ '{:,.0f}'.format(car.price) }} | <small>${{ '{:,.0f}'.format(car.price * ((0.15 / 12) * (1 + (0.15 / 12)) ** 36) / (((1 + (0.15 / 12)) ** 36) - 1)) }}/mo*</small></p>
+                    <p class="card-mileage"><i>Mileage:</i> {{ '{:,.0f}'.format(car.mileage) }} miles</p>
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
-</div>
+
+
+  
+
+
 {% include 'footer.html' %}
