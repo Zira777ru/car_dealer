@@ -1,0 +1,13 @@
+# docker-compose.yml
+version: '3'
+services:
+  outline-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: outline-app
+    restart: always
+    volumes:
+      - ./instance:/instance  
+    ports:
+      - 7000:7000
