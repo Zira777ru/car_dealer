@@ -11,3 +11,5 @@ services:
       - ./instance:/instance  
     ports:
       - 7000:7000
+    environment:
+      - APPLICATION_ROOT=/car_dealer  # Устанавливаем корень приложения
